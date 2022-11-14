@@ -18,7 +18,8 @@ public:
 	{
 		cout << "infoDb constructor" << endl;
 	}
-	~info_DATA_Base()
+
+	virtual ~info_DATA_Base()
 	{
 		cout << "infoDB deconstructor" << endl;
 	}
@@ -66,17 +67,32 @@ public:
 	void write_infoToDAtabase(string textlink) override;
 
 	void getInfoFromDataBase(string textlink) override;
+
+
+
+	Delivery_Truck & operator=(const Delivery_Truck &other);
+
+	Delivery_Truck& operator+(const Delivery_Truck& other);
+
+	Delivery_Truck& operator-(const Delivery_Truck& other);
+
+	bool operator==(const Delivery_Truck& other) const;
+
 private:
 	bool isable;// чи вільна
 	string inWhatcityCar;
 	list<Delivery> whatDeliveryOnthatTRUCk;
-	
+
+
+
+
 };
 
 
 class CarDelivery: public info_DATA_Base
 {
 public:
+	~CarDelivery() = default;
 	CarDelivery(int id, string car_adress, string fromcity, bool isable, int price, string inwhat_citynow,
 		string ownername, string ibank, int salary_forthisfop, list<Delivery> what_delivery_onthat_tru_ck)
 		: info_DATA_Base(id),

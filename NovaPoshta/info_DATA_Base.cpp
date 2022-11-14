@@ -88,6 +88,45 @@ void Delivery_Truck::getInfoFromDataBase(string textlink)
 		
 }
 
+Delivery_Truck& Delivery_Truck::operator=(const Delivery_Truck& other)
+{
+	this->carAdress = other.carAdress;
+	this->howmanyDelivery = other.howmanyDelivery;
+	this->nameoftheCar = other.nameoftheCar;
+	this->whatDeliveryOnthatTRUCk = other.whatDeliveryOnthatTRUCk;
+	this->inWhatcityCar = other.inWhatcityCar;
+	this->isable = other.isable;
+
+	return *this;
+}
+
+Delivery_Truck& Delivery_Truck::operator+(const Delivery_Truck& other)
+{
+		
+	this->isable = true;
+
+	return *this;
+}
+
+Delivery_Truck& Delivery_Truck::operator-(const Delivery_Truck& other)
+{
+
+	this->isable = false;
+
+	return *this;
+}
+
+bool Delivery_Truck::operator==(const Delivery_Truck& other) const
+{
+		
+	if (this->carAdress == other.carAdress && this->howmanyDelivery == other.howmanyDelivery )
+	{
+		return true;
+	}
+	else return false;
+		
+}
+
 string CarDelivery::get_inwhat_citynow() const
 {
 	return InwhatCitynow;

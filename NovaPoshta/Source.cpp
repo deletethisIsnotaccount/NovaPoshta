@@ -2,6 +2,9 @@
 #include <fstream>
 #include <vector>
 #include <iostream>
+#include <set>
+#include <unordered_set>
+
 #include "Human.h"
 #include "Client.h"
 #include "Delivery.h"
@@ -34,8 +37,10 @@ int main ()
 	Delivery_Truck mytrucl_truck(1,"Truck1","Kherson",20,true,"Khmelnytskyi", posulkalist);
 	CarDelivery mycar(1, "Khmelnytskyi", "Khmelnytskyi", true, 55, "Kherson", "Pavlo", "UAVUSUUACT7876", 10000, posulkalist);
 	PersonalDelivery mypersonaldelivery(1, "pavlo", "usual", "523");
+	
 
-	info_DATA_Base* p=&mytrucl_truck;
+
+	info_DATA_Base* p=&mytrucl_truck;//поліморфізм
 	info_DATA_Base* p2 = &mycar;
 	info_DATA_Base* p3 = &mytrucl_truck;
 	p->write_infoToDAtabase("somedb");
@@ -43,7 +48,44 @@ int main ()
 	p3->write_infoToDAtabase("user");
 	p->getInfoFromDataBase("somedb");
 	p2->getInfoFromDataBase("user.txt");
-	p3->getInfoFromDataBase("user.txt");
+	p3->getInfoFromDataBase("user.txt");// поліморфізм
+
+	// перевантажені оператори
+	Delivery_Truck operatortruck(1, "", "", 0, false, "", posulkalist);
+
+	operatortruck +mytrucl_truck;  // - або + змінює тру або фолс isable
+	operatortruck - mytrucl_truck;
+	operatortruck= mytrucl_truck;
+	bool b = operatortruck == mytrucl_truck; //чи рівні;
+	cout << b;
+
+	// stl
+
+	// initialize a set of int type
+	set<int> numbers = { 1, 100, 10, 70, 100 };
+
+	// print the set
+	cout << "Numbers are: ";
+	for (auto& num : numbers) {
+		cout << num << ", ";
+	}
+	// initialize a vector of int type
+		vector<int> n = { 1, 100, 10, 70, 100 };
+
+	// print the vector
+	cout << "Numbers are: ";
+	for (auto& num : n) {
+		cout << num << ", ";
+	}
+
+	unordered_set<int> na = { 1, 100, 10, 70, 100 };
+
+	// print the set
+	cout << "Numbers are: ";
+	for (auto& num : na) {
+		cout << num << ", ";
+	}
+
 
 	return 0;
 }
